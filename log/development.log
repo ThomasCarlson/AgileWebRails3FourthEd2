@@ -1,0 +1,279 @@
+
+
+Started GET "/" for 127.0.0.1 at Mon Oct 20 13:03:41 -0400 2014
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+SQLite3::SQLException: no such table: products: SELECT "products".* FROM "products" ORDER BY title
+Completed   in 25ms
+
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such table: products: SELECT "products".* FROM "products" ORDER BY title):
+  app/controllers/store_controller.rb:19:in `index'
+
+Rendered /Users/tcarlson/.rvm/gems/ree-1.8.7-2012.02@pragprog/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_trace.erb (0.5ms)
+Rendered /Users/tcarlson/.rvm/gems/ree-1.8.7-2012.02@pragprog/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (2.6ms)
+Rendered /Users/tcarlson/.rvm/gems/ree-1.8.7-2012.02@pragprog/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (6.7ms)
+  [1m[36mSQL (0.2ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (1.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("schema_migrations")
+  [1m[36mSQL (0.8ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+Migrating to CreateProducts (20110211000001)
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE TABLE "products" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar(255), "description" text, "image_url" varchar(255), "price" decimal(8,2), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110211000001')
+Migrating to CreateCarts (20110211000002)
+  [1m[36mSQL (0.1ms)[0m  [1mCREATE TABLE "carts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110211000002')
+Migrating to CreateLineItems (20110211000003)
+  [1m[36mSQL (0.2ms)[0m  [1mCREATE TABLE "line_items" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "product_id" integer, "cart_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.0ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110211000003')
+Migrating to AddQuantityToLineItems (20110211000004)
+  [1m[36mSQL (0.3ms)[0m  [1mALTER TABLE "line_items" ADD "quantity" integer DEFAULT 1[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110211000004')
+Migrating to CombineItemsInCart (20110211000005)
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts"[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ('20110211000005')
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("carts")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("line_items")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("products")
+
+
+Started GET "/" for 127.0.0.1 at Mon Oct 20 13:07:12 -0400 2014
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.3ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+Rendered store/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 20ms (Views: 4.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/store" for 127.0.0.1 at Mon Oct 20 13:07:22 -0400 2014
+
+ActionController::RoutingError (No route matches "/store"):
+  
+
+Rendered /Users/tcarlson/.rvm/gems/ree-1.8.7-2012.02@pragprog/gems/actionpack-3.0.5/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Oct 20 13:07:37 -0400 2014
+  Processing by StoreController#index as HTML
+  [1m[35mProduct Load (0.2ms)[0m  SELECT "products".* FROM "products" ORDER BY title
+Rendered store/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 7ms (Views: 3.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/products" for 127.0.0.1 at Mon Oct 20 13:07:52 -0400 2014
+  Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+Rendered products/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 9ms (Views: 4.3ms | ActiveRecord: 0.2ms)
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+  [1m[35mAREL (0.1ms)[0m  DELETE FROM "products" WHERE 1=1
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products"."id" FROM "products" WHERE ("products"."title" = 'Web Design for Developers') LIMIT 1[0m
+  [1m[35mAREL (0.3ms)[0m  INSERT INTO "products" ("price", "title", "updated_at", "description", "created_at", "image_url") VALUES (42.95, 'Web Design for Developers', '2014-10-20 17:08:48.129693', '<p>
+ <em>Web Design for Developers</em> will show you how to make your
+ web-based application look professionally designed. We''ll help you
+ learn how to pick the right colors and fonts, avoid costly interface
+ and accessibility mistakes -- your application will really come alive.
+ We''ll also walk you through some common Photoshop and CSS techniques
+ and work through a web site redesign, taking a new design from concept
+ all the way to implementation.
+ </p>', '2014-10-20 17:08:48.129693', '/images/wd4d.jpg')
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products"."id" FROM "products" WHERE ("products"."title" = 'Programming Ruby 1.9') LIMIT 1[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO "products" ("price", "title", "updated_at", "description", "created_at", "image_url") VALUES (49.5, 'Programming Ruby 1.9', '2014-10-20 17:08:48.132199', '<p>
+ Ruby is the fastest growing and most exciting dynamic language
+ out there. If you need to get working programs delivered fast,
+ you should add Ruby to your toolbox.
+ </p>', '2014-10-20 17:08:48.132199', '/images/ruby.jpg')
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products"."id" FROM "products" WHERE ("products"."title" = 'Rails Test Prescriptions') LIMIT 1[0m
+  [1m[35mAREL (0.1ms)[0m  INSERT INTO "products" ("price", "title", "updated_at", "description", "created_at", "image_url") VALUES (43.75, 'Rails Test Prescriptions', '2014-10-20 17:08:48.134036', '<p>
+ <em>Rails Test Prescriptions</em> is a comprehensive guide to testing
+ Rails applications, covering Test-Driven Development from both a
+ theoretical perspective (why to test) and from a practical perspective
+ (how to test effectively). It covers the core Rails testing tools and
+ procedures for Rails 2 and Rails 3, and introduces popular add-ons,
+ including Cucumber, Shoulda, Machinist, Mocha, and Rcov.
+ </p>', '2014-10-20 17:08:48.134036', '/images/rtp.jpg')
+  [1m[36mSQL (0.3ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mSQL (0.1ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations"[0m
+Migrating to CreateProducts (20110211000001)
+Migrating to CreateCarts (20110211000002)
+Migrating to CreateLineItems (20110211000003)
+Migrating to AddQuantityToLineItems (20110211000004)
+Migrating to CombineItemsInCart (20110211000005)
+  [1m[35mSQL (0.0ms)[0m  select sqlite_version(*)
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.1ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations"
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("carts")
+  [1m[36mSQL (0.0ms)[0m  [1mPRAGMA index_list("line_items")[0m
+  [1m[35mSQL (0.0ms)[0m  PRAGMA index_list("products")
+
+
+Started GET "/products" for 127.0.0.1 at Mon Oct 20 13:09:41 -0400 2014
+  Processing by ProductsController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+Rendered products/index.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 39ms (Views: 22.3ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Oct 20 13:09:56 -0400 2014
+  Processing by StoreController#index as HTML
+  [1m[35mProduct Load (0.2ms)[0m  SELECT "products".* FROM "products" ORDER BY title
+Rendered store/index.html.erb within layouts/application (7.8ms)
+Completed 200 OK in 15ms (Views: 10.4ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/line_items?product_id=2" for 127.0.0.1 at Mon Oct 20 13:10:00 -0400 2014
+  Processing by LineItemsController#create as HTML
+  Parameters: {"product_id"=>"2", "authenticity_token"=>"Q4xedbM88VdoMCcRq5bNfBt3B6j87nH3ghRlsDmn0yk="}
+  [1m[36mSQL (0.1ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mAREL (0.4ms)[0m  INSERT INTO "carts" ("created_at", "updated_at") VALUES ('2014-10-20 17:10:00.012931', '2014-10-20 17:10:00.012931')
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1[0m
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" = 2 AND ("line_items".cart_id = 1) LIMIT 1
+  [1m[36mAREL (0.2ms)[0m  [1mINSERT INTO "line_items" ("created_at", "product_id", "quantity", "updated_at", "cart_id") VALUES ('2014-10-20 17:10:00.032330', 2, 1, '2014-10-20 17:10:00.032330', 1)[0m
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1
+Redirected to http://localhost:3001/carts/1
+Completed 302 Found in 27ms
+
+
+Started GET "/carts/1" for 127.0.0.1 at Mon Oct 20 13:10:00 -0400 2014
+  Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE ("line_items".cart_id = 1)
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1[0m
+Rendered carts/show.html.erb within layouts/application (15.7ms)
+Completed 200 OK in 22ms (Views: 18.5ms | ActiveRecord: 1.3ms)
+
+
+Started POST "/line_items?product_id=3" for 127.0.0.1 at Mon Oct 20 13:10:13 -0400 2014
+  Processing by LineItemsController#create as HTML
+  Parameters: {"product_id"=>"3", "authenticity_token"=>"Q4xedbM88VdoMCcRq5bNfBt3B6j87nH3ghRlsDmn0yk="}
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 3 ORDER BY title LIMIT 1[0m
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" = 3 AND ("line_items".cart_id = 1) LIMIT 1
+  [1m[36mAREL (0.3ms)[0m  [1mINSERT INTO "line_items" ("cart_id", "created_at", "updated_at", "quantity", "product_id") VALUES (1, '2014-10-20 17:10:13.397054', '2014-10-20 17:10:13.397054', 1, 3)[0m
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1
+Redirected to http://localhost:3001/carts/1
+Completed 302 Found in 64ms
+
+
+Started GET "/carts/1" for 127.0.0.1 at Mon Oct 20 13:10:13 -0400 2014
+  Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE ("line_items".cart_id = 1)
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 3 ORDER BY title LIMIT 1
+Rendered carts/show.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 23ms (Views: 18.9ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/line_items?product_id=1" for 127.0.0.1 at Mon Oct 20 13:10:17 -0400 2014
+  Processing by LineItemsController#create as HTML
+  Parameters: {"product_id"=>"1", "authenticity_token"=>"Q4xedbM88VdoMCcRq5bNfBt3B6j87nH3ghRlsDmn0yk="}
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 1 ORDER BY title LIMIT 1
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" = 1 AND ("line_items".cart_id = 1) LIMIT 1[0m
+  [1m[35mAREL (0.2ms)[0m  INSERT INTO "line_items" ("cart_id", "product_id", "quantity", "updated_at", "created_at") VALUES (1, 1, 1, '2014-10-20 17:10:17.108720', '2014-10-20 17:10:17.108720')
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+Redirected to http://localhost:3001/carts/1
+Completed 302 Found in 20ms
+
+
+Started GET "/carts/1" for 127.0.0.1 at Mon Oct 20 13:10:17 -0400 2014
+  Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE ("line_items".cart_id = 1)[0m
+  [1m[35mProduct Load (0.2ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 3 ORDER BY title LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 1 ORDER BY title LIMIT 1
+Rendered carts/show.html.erb within layouts/application (16.8ms)
+Completed 200 OK in 22ms (Views: 18.7ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/" for 127.0.0.1 at Mon Oct 20 13:12:00 -0400 2014
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+Rendered store/index.html.erb within layouts/application (11.3ms)
+Completed 200 OK in 30ms (Views: 13.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/line_items?product_id=2" for 127.0.0.1 at Mon Oct 20 13:12:05 -0400 2014
+  Processing by LineItemsController#create as HTML
+  Parameters: {"product_id"=>"2", "authenticity_token"=>"Q4xedbM88VdoMCcRq5bNfBt3B6j87nH3ghRlsDmn0yk="}
+  [1m[35mSQL (0.1ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."product_id" = 2 AND ("line_items".cart_id = 1) LIMIT 1[0m
+  [1m[35mAREL (0.2ms)[0m  UPDATE "line_items" SET "quantity" = 2, "updated_at" = '2014-10-20 17:12:05.433788' WHERE "line_items"."id" = 1
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+Redirected to http://localhost:3001/carts/1
+Completed 302 Found in 22ms
+
+
+Started GET "/carts/1" for 127.0.0.1 at Mon Oct 20 13:12:05 -0400 2014
+  Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE ("line_items".cart_id = 1)[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 3 ORDER BY title LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 1 ORDER BY title LIMIT 1
+Rendered carts/show.html.erb within layouts/application (16.9ms)
+Completed 200 OK in 23ms (Views: 19.0ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/carts/1" for 127.0.0.1 at Mon Oct 20 13:14:09 -0400 2014
+  Processing by CartsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = 1 LIMIT 1[0m
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE ("line_items".cart_id = 1)
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 2 ORDER BY title LIMIT 1[0m
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" WHERE "products"."id" = 3 ORDER BY title LIMIT 1
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 1 ORDER BY title LIMIT 1[0m
+Rendered carts/show.html.erb within layouts/application (17.1ms)
+Completed 200 OK in 23ms (Views: 19.2ms | ActiveRecord: 0.5ms)
